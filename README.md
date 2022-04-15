@@ -21,7 +21,7 @@ At the end, under [Useful Links](#useful-links), there is a small list of docume
 * [Sugested steps to deploy your app in Heroku](#sugested-steps-to-deploy-your-app-in-heroku)
 * [Run in localhost](#run-in-localhost)
 * [Future app updates](#future-app-updates)
-* [Recommended: Python version](#recommended:-python-version)
+* [Recommended: Python version](#recommended-python-version)
 * [Useful Links](#useful-links)
     * [Python](#python)
     * [Virtual Environments](#virtual-environments)
