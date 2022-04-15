@@ -6,7 +6,11 @@ Minimun working Flask app to run in Heroku server. Just clone and use heroku-cli
 * Main packages: flask, gunicorn
 * Tools: heroku-cli
 
->Note: New to git? New to Heroku? Keep reading for an **extremely straightforward tutorial!**
+[](#sugested-steps-to-deploy-your-app-in-heroku-server)
+
+Already know git and Heroku? **Jump to** "Sugested steps to deploy your app in Heroku server" section.
+
+**Don't know** git? **Don't know** Heroku? **Keep reading** for an **extremely straightforward tutorial!**
 
 # Git and Heroku CLI
 
@@ -76,12 +80,13 @@ Note: If "heroku open" don't start your browser, your application link will be:
 
 <https://YOUR_NEW_APP_NAME.herokuapp.com>
 
-# Test locally
+# Test in localhost (your machine)
 
-* If you use environments (venv, virtualenv, conda etc), create your environment with python3 bindings.
+* If you want to use an environment (venv, virtualenv, conda etc), create it with python3 bindings.
 * Install project packages:
   * flask, gunicorn
   * (preferably) install packages defined in requirements.txt file and update it every time you add a new package.
+    * Note: requirements.txt is the output of "python freeze"
 
 If everything was set, test locally with:
 
@@ -162,6 +167,10 @@ The command you return something like:
 * Tutorial: https://www.javatpoint.com/python-tutorial
 * Documentation: https://docs.python.org/3/
 
+## Virtual Environments
+
+* Tutorial: https://realpython.com/python-virtual-environments-a-primer/
+
 ## Flask
   
 * Project
@@ -176,6 +185,8 @@ The command you return something like:
 
 ## Frontend
 
+* HTML
+  * https://www.w3schools.com/html/default.asp
 * CSS Tutorial:
   * https://www.w3schools.com/css/
   * https://www.tutorialspoint.com/css/index.htm
