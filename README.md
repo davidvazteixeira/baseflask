@@ -133,7 +133,7 @@ Return to browser and check your updated website.
 
 There is no guarantee that the Python version installed locally will be the same one used by Heroku. Also, the server has some versions available and, if not specified, it will use some default version.
 
-To avoid unpleasant surprises, the ideal is to always **use the same version in development and on the server**.
+To avoid unpleasant surprises, the ideal is to always **use the same version in development and in the server**.
 
 In the main project folder, create a **runtime.txt** file and add just one line:
 
