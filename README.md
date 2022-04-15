@@ -3,12 +3,12 @@
 Minimun working Flask app to run in Heroku server. Just clone and use heroku-cli.
   
 * Version: Python3
-* Packages: flask, gunicorn
+* Main packages: flask, gunicorn
 * Tools: heroku-cli
 
-# Git and Heroku CLI
+>Note: New to git? New to Heroku? Keep reading for an **extremely straightforward tutorial!**
 
-New to git? New to Heroku? 
+# Git and Heroku CLI
 
 ## Git
 
@@ -61,13 +61,14 @@ A new browser window will open. Just login with your Heroku login/pass. After lo
 # Sugested steps to deploy your app in Heroku server
 
 ```bash
-  git clone GITLINK                   # Here you are cloning this base app
-  cd GITLINK                          # go to cloned project folder
-  heroku create YOUR_NEW_APP_NAME     # create a new heroku app in your account
-  git push heroku master              # push modifications to server
+  git clone https://github.com/davidvazteixeira/baseflask.git   # Here you are cloning this base app
+  cd baseflask                                                  # go to cloned project folder
+  heroku create YOUR_NEW_APP_NAME                               # create a new heroku app in your account
+  git push heroku master                                        # push modifications to server
 
-  #... many outout lines here!
+  # ... Many output lines here! Check for erros!
     
+  heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
   heroku open                         # open the link in a browser window
 ```
 
@@ -79,7 +80,7 @@ Note: If "heroku open" don't start your browser, your application link will be:
 
 * If you use environments (venv, virtualenv, conda etc), create your environment with python3 bindings.
 * Install project packages:
-  * flask
+  * flask, gunicorn
   * (preferably) install packages defined in requirements.txt file and update it every time you add a new package.
 
 If everything was set, test locally with:
@@ -88,23 +89,63 @@ If everything was set, test locally with:
 flask run
 ```
 
-And you app will be running the he URL: <http://localhost:5000> or <http://127.0.0.1:5000>
+or ...
 
-If you got "flask not found" than you forgot to: 1) activate your python environment or 2) install flask
+```
+gunicorn app:app
+```
+
+And your app will be running at URL:
+
+  * flask run: <http://localhost:5000> or <http://127.0.0.1:5000>
+  * gunicorn:  <http://localhost:8000> or <http://127.0.0.1:8000>
+
+If you got "flask/gunicorn not found" than you forgot to: 1) activate your Python environment or 2) install flask or gunicorn.
 
 # Future app updates
 
-> Note: This is an oversimplified scenario that is "just good" for a git newbie.
+> Note: This is an oversimplified scenario that "just works" for a git newbie.
 
-After you make change in some files, you will need to push this "new version" of the server. Back to terminal, in the root folder of your project:
+After you make changes in some files you will need to push this "new version" of the code to the server.
+
+Go back to terminal in the root folder of your project and:
 
 ```
-git status                    # just to see all new and modified files
-git add -A                    # Add every modification listed for the commit
-git commit -m 'some message'  # Apply the commit
-git push heroku master        # Push all commits to the server
+git status                      # just to see all new and modified files
+git add -A                      # Add every modification listed for the commit
+git commit -m 'some message'    # Apply the commit
+git push heroku master          # Push all commits to the server
 ```
 
-> Note: After *EVERY* git push, the Heroku server will automatically re deploy. Check the output for errors!
+> Note: After *EVERY* push, Heroku server will automatically deploy again your app. Always check the output for errors!
 
-Return to browser and check you updated website.
+Return to browser and check your updated website.
+
+# Recommended: Python version
+
+There is no guarantee that the Python version installed locally will be the same one used by Heroku. Also, the server has some versions available and, if not specified, it will use some default version.
+
+To avoid unpleasant surprises, the ideal is to always **use the same version in development and on the server**.
+
+In the main project folder, create a **runtime.txt** file and add just one line:
+
+```
+python-3.8.10
+```
+
+You can check your development version by running:
+
+```
+  python -V      # generally under environment
+  python3 -V     # generally under system environment
+```
+
+The command you return something like:
+
+**Python 3.8.10**
+
+> Note: Pay attention in the difference between the output and the form that needs to be placed in the **runtime.txt** file.
+
+* Documentation: https://devcenter.heroku.com/articles/python-support
+* Documentation: https://devcenter.heroku.com/articles/python-runtimes
+
