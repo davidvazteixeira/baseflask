@@ -3,7 +3,7 @@
 Minimun working Flask app to run in Heroku server. Just clone and use heroku-cli.
   
 * Version: Python3
-* Packages: Flask
+* Packages: flask, gunicorn
 * Tools: heroku-cli
 
 # Git and Heroku CLI
@@ -64,8 +64,6 @@ A new browser window will open. Just login with your Heroku login/pass. After lo
   git clone GITLINK                   # Here you are cloning this base app
   cd GITLINK                          # go to cloned project folder
   heroku create YOUR_NEW_APP_NAME     # create a new heroku app in your account
-  git add -A                          # add the files to commit
-  git commit -m 'Initial Commit'      # commit
   git push heroku master              # push modifications to server
 
   #... many outout lines here!
