@@ -1,16 +1,32 @@
-# Mininum Flask App
+# Base Flask App
 
-Minimun working Flask app to run in Heroku server. Just clone and use heroku-cli.
-  
+The idea of this repository is that you simply clone it and start your development.
+
+This code is a starting base for creating projects in Flask. It already comes with a minimal application that "just works" without you having to write a single line of code. It has a **suggested** folder structure to simplify your life and is already configured to be used on the Heroku server.
+
+**If you're new to GIT or Heroku**, keep reading for an **extremely straightforward tutorial** on how to install and configure both, which you'll need in development. **If you already know**, skip directly to [Sugested steps to deploy your app in Heroku](#sugested-steps-to-deploy-your-app-in-heroku).
+
+At the end, under [Useful Links](#useful-links), there is a small list of documentation and links to Python, Flask, HTML, Javascript and CSS.
+
 * Version: Python3
 * Main packages: flask, gunicorn
-* Tools: heroku-cli
+* Tools: heroku-cli, git
 
-[](#sugested-steps-to-deploy-your-app-in-heroku-server)
+# Contents
 
-Already know git and Heroku? **Jump to** "Sugested steps to deploy your app in Heroku server" section.
-
-**Don't know** git? **Don't know** Heroku? **Keep reading** for an **extremely straightforward tutorial!**
+* [Base Flask App](#base-flask-app)
+* [Git and Heroku CLI](#git-and-heroku-cli)
+    * [Git](#git)
+    * [Heroku-CLI](#heroku-cli)
+* [Sugested steps to deploy your app in Heroku](#sugested-steps-to-deploy-your-app-in-heroku)
+* [Run in localhost](#run-in-localhost)
+* [Future app updates](#future-app-updates)
+* [Recommended: Python version](#recommended:-python-version)
+* [Useful Links](#useful-links)
+    * [Python](#python)
+    * [Virtual Environments](#virtual-environments)
+    * [Flask](#flask)
+    * [Frontend](#frontend)
 
 # Git and Heroku CLI
 
@@ -37,7 +53,7 @@ Generally you just need theses commands:
 
 <https://devcenter.heroku.com/articles/heroku-cli>
 
-**Check your instalation**
+**Check your installation:**
 
 ```bash
   $ heroku --version
@@ -54,6 +70,7 @@ If you see a version information the installation is right.
 A new browser window will open. Just login with your Heroku login/pass. After logon, return to terminal and if everything was right you will see something like this:
 
 ```
+  $ heroku login
   heroku: Press any key to open up the browser to login or q to exit
    ›   Warning: If browser does not open, visit
    ›   https://cli-auth.heroku.com/auth/browser/***
@@ -62,41 +79,43 @@ A new browser window will open. Just login with your Heroku login/pass. After lo
   Logged in as YOUR_HEROKU_LOGIN
 ```
 
-# Sugested steps to deploy your app in Heroku server
+# Sugested steps to deploy your app in Heroku
 
 ```bash
-  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Here you are cloning this base app
-  $ cd baseflask                                                  # go to cloned project folder
-  $ heroku create YOUR_NEW_APP_NAME                               # create a new heroku app in your account
+  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Clone this rep
+  $ cd baseflask                                                  # go to folder
+  $ heroku create YOUR_NEW_APP_NAME                               # create a heroku app
   $ git push heroku master                                        # push modifications to server
 
   # ... Many output lines here! Check for erros!
     
   $ heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
-  $ heroku open                         # open the link in a browser window
+  $ heroku open                         # open link in a browser window
 ```
 
 Note: If "heroku open" don't start your browser, your application link will be:
 
 <https://YOUR_NEW_APP_NAME.herokuapp.com>
 
-# Test in localhost (your machine)
+# Run in localhost
+
+localhost is the machine you are on.
 
 * If you want to use an environment (venv, virtualenv, conda etc), create it with python3 bindings.
 * Install project packages:
   * flask, gunicorn
   * (preferably) install packages defined in requirements.txt file and update it every time you add a new package.
-    * Note: requirements.txt is the output of "python freeze"
+    * Note: requirements.txt is the output of "pip freeze"
 
-If everything was set, test locally with:
+If everything was set correctly, test locally with:
 
-Development server 
+Development webserver 
 ```
   $ flask run                   # Or ...
   $ python -m flask run
 ```
 
-or a more robust server (same running in Heroku):
+or a more robust webserver (same running in Heroku):
 
 ```
   $ gunicorn app:app            # Or ...
@@ -120,8 +139,8 @@ Go back to terminal in the root folder of your project and:
 
 ```
 git status                      # just to see all new and modified files
-git add -A                      # Add every modification listed for the commit
-git commit -m 'some message'    # Apply the commit
+git add -A                      # Mark all modifications for commit
+git commit -m 'some message'    # Apply the commit, with a message
 git push heroku master          # Push all commits to the server
 ```
 
@@ -152,7 +171,7 @@ The command you return something like:
 
 **Python 3.8.13**
 
-> Note: Pay attention in the difference between the output and the form that needs to be placed in the **runtime.txt** file.
+> Note: Pay attention in the difference between the output and the form that needs to be placed in the **runtime.txt** file. You can check the Documentation below "Python Support".
 
 * Documentation: https://devcenter.heroku.com/articles/python-support
 * Documentation: https://devcenter.heroku.com/articles/python-runtimes
