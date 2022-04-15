@@ -85,12 +85,13 @@ Note: If "heroku open" don't start your browser, your application link will be:
 
 If everything was set, test locally with:
 
+Development server 
 ```
   $ flask run                   # Or ...
   $ python -m flask run
 ```
 
-or ...
+or a more robust server (same running in Heroku):
 
 ```
   $ gunicorn app:app            # Or ...
@@ -151,7 +152,17 @@ The command you return something like:
 * Documentation: https://devcenter.heroku.com/articles/python-support
 * Documentation: https://devcenter.heroku.com/articles/python-runtimes
 
-# Flask tips
+# Useful Links
+  
+## Python
+
+* Tutorial: https://www.w3schools.com/python/
+* Tutorial: https://realpython.com/
+* Tutorial: https://www.tutorialspoint.com/python3/index.htm
+* Tutorial: https://www.javatpoint.com/python-tutorial
+* Documentation: https://docs.python.org/3/
+
+## Flask
   
 * Project
     * Page: https://flask.palletsprojects.com
@@ -163,9 +174,21 @@ The command you return something like:
 * Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 * Tutorial (extension): https://flask-restful.readthedocs.io/en/latest/
 
-# Python tips
+## Frontend
 
-* Tutorial: https://www.w3schools.com/python/
-* Tutorial: https://realpython.com/
-* Tutorial: https://www.tutorialspoint.com/python3/index.htm
-* Documentation: https://docs.python.org/3/
+* CSS Tutorial:
+  * https://www.w3schools.com/css/
+  * https://www.tutorialspoint.com/css/index.htm
+  * https://www.javatpoint.com/css-tutorial
+* Boostrap (CSS Framework) Tutorial:
+  * https://www.w3schools.com/bootstrap/
+  * https://www.tutorialspoint.com/bootstrap/index.htm
+  * https://www.javatpoint.com/bootstrap-tutorial
+* Javascript Tutorial:
+  * https://www.w3schools.com/js/
+  * https://www.tutorialspoint.com/javascript/index.htm
+  * https://www.javatpoint.com/javascript-tutorial
+* jQuery (JS library) Tutorial:
+  * https://www.w3schools.com/jquery/default.asp
+  * https://www.tutorialspoint.com/jquery/index.htm
+  * https://www.javatpoint.com/jquery-tutorial

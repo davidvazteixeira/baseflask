@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Works!</h1>
+  <p>The website files are in <b>/app/</b> folder. It's the page root with other subfolders:</p>
+  <ul>
+    <li>Put your HTML files in <b>/app/templates/</b> folder</li>
+    <li>Edit your base HTML template in <b>/app/templates/base.html</b> file</li>
+    <li>Put your images in <b>/app/static/images/</b> folder</li>
+    <li>Put your CSS in <b>/app/static/css/style.css</b> file</li>
+    <li>Put your Javascript in <b>/app/static/js/script.js</b> file</li>
+  </ul>
+  <p>
+  Sample Image<br>
+  <img src='/static/images/icon.png'>
+  </p>
+
+  <p>Create another page duplicating <b>/app/templates/bare_minimum.html</b> and addig another route in <b>/app/routes.py</b>.</p>
+  
+{% endblock %}
