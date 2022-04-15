@@ -21,8 +21,8 @@ Minimun working Flask app to run in Heroku server. Just clone and use heroku-cli
 Generally you just need theses commands:
 
 ```bash
-  git config --global user.name "Your name"
-  git config --global user.email your_email@mail.com
+  $ git config --global user.name "Your name"
+  $ git config --global user.email your_email@mail.com
 ```
 
 * Full documentation: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
@@ -36,7 +36,7 @@ Generally you just need theses commands:
 **Check your instalation**
 
 ```bash
-  heroku --version
+  $ heroku --version
 ```
 
 If you see a version information the installation is right.
@@ -44,7 +44,7 @@ If you see a version information the installation is right.
 **Connect with your Heroku account**
 
 ```
-  heroku login
+  $ heroku login
 ```
 
 A new browser window will open. Just login with your Heroku login/pass. After logon, return to terminal and if everything was right you will see something like this:
@@ -61,15 +61,15 @@ A new browser window will open. Just login with your Heroku login/pass. After lo
 # Sugested steps to deploy your app in Heroku server
 
 ```bash
-  git clone https://github.com/davidvazteixeira/baseflask.git   # Here you are cloning this base app
-  cd baseflask                                                  # go to cloned project folder
-  heroku create YOUR_NEW_APP_NAME                               # create a new heroku app in your account
-  git push heroku master                                        # push modifications to server
+  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Here you are cloning this base app
+  $ cd baseflask                                                  # go to cloned project folder
+  $ heroku create YOUR_NEW_APP_NAME                               # create a new heroku app in your account
+  $ git push heroku master                                        # push modifications to server
 
   # ... Many output lines here! Check for erros!
     
-  heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
-  heroku open                         # open the link in a browser window
+  $ heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
+  $ heroku open                         # open the link in a browser window
 ```
 
 Note: If "heroku open" don't start your browser, your application link will be:
@@ -86,13 +86,15 @@ Note: If "heroku open" don't start your browser, your application link will be:
 If everything was set, test locally with:
 
 ```
-flask run
+  $ flask run                   # Or ...
+  $ python -m flask run
 ```
 
 or ...
 
 ```
-gunicorn app:app
+  $ gunicorn app:app            # Or ...
+  $ python -m gunicorn app:app
 ```
 
 And your app will be running at URL:
@@ -130,7 +132,7 @@ To avoid unpleasant surprises, the ideal is to always **use the same version in 
 In the main project folder, create a **runtime.txt** file and add just one line:
 
 ```
-python-3.8.10
+python-3.8.13
 ```
 
 You can check your development version by running:
@@ -142,10 +144,28 @@ You can check your development version by running:
 
 The command you return something like:
 
-**Python 3.8.10**
+**Python 3.8.13**
 
 > Note: Pay attention in the difference between the output and the form that needs to be placed in the **runtime.txt** file.
 
 * Documentation: https://devcenter.heroku.com/articles/python-support
 * Documentation: https://devcenter.heroku.com/articles/python-runtimes
 
+# Flask tips
+  
+* Project
+    * Page: https://flask.palletsprojects.com
+    * Quickstart: https://flask.palletsprojects.com/en/2.1.x/quickstart/
+    * Documentation: https://flask.palletsprojects.com/en/2.1.x/tutorial/
+* Tutorial: https://overiq.com/flask-101/ 
+* Tutorial: https://realpython.com/tutorials/flask/
+* Tutorial: https://www.tutorialspoint.com/flask/index.htm
+* Tutorial: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+* Tutorial (extension): https://flask-restful.readthedocs.io/en/latest/
+
+# Python tips
+
+* Tutorial: https://www.w3schools.com/python/
+* Tutorial: https://realpython.com/
+* Tutorial: https://www.tutorialspoint.com/python3/index.htm
+* Documentation: https://docs.python.org/3/
