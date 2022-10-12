@@ -20,6 +20,8 @@ At the end, under [Useful Links](#useful-links), there is a small list of docume
 
 * [Introduction](#base-flask-app)
 * [Install](#install)
+    * [WithOUT Anaconda](without-anaconda)
+    * [With Anaconda](with-anaconda)
 * [Git](#git)
 * [Run in localhost](#run-in-localhost)
 * [Suggested steps to deploy your app](#suggested-steps-to-deploy-your-app)
@@ -40,7 +42,7 @@ At the end, under [Useful Links](#useful-links), there is a small list of docume
 
 # Install
 
-## Using pip+venv (Linux) 
+## Without Anaconda 
 
 You must have:
 
@@ -60,7 +62,7 @@ You must have:
 
 After these steps, your server will be running in localhost:5000
 
-## Using Anaconda
+## With Anaconda
 
 You must have:
 
