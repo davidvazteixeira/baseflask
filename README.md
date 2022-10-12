@@ -290,6 +290,13 @@ Go back to terminal in the root folder of your project and:
 * Render:
   * In render, you can use the same github.
   * probably the server is just "origin", so use in place of SERVER
+  * If after a "push" the deploy processos do not trigger, trigger manualy. Go to dashboard, find the project and click on it. Then:
+    * Using dashboard
+      * Click "Manual Deploy" and choose "Deploy last commit"
+    * Using dash board only one time
+      * Click on settings on side panel and find "deploy hook".
+      * copy the link in the form "https://api.render.com/deploy/SERVER?key=KEY" (DO NOT SHARE PUBLIC)
+      * Any access to this link will trigger the deploy. You can use browser ou automate with wget, curl...
 
 > Note: Return to browser and check your updated website.
 
