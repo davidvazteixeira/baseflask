@@ -1,11 +1,15 @@
 # Base Flask App
 
+**UPDATE 12-10-2022**
+
+> Heroku **FREE PLANS IS NO MORE**! There's a new section to deploy to Render. The Heroku sections still works, but you must sign a non free plan.
+
 The idea of this repository is that you simply clone it and start your development.
 
-This code is a starting base for creating projects in Flask. It already comes with a minimal application that "just works" without you having to write a single line of code. It has a **suggested** folder structure to simplify your life and is already configured to be used on the Heroku server.
+This code is a starting basis for creating projects in Flask. It already comes with a minimal application that "just works" without you having to write a single line of code. It has a **suggested** folder structure to simplify your life and is already configured to be used on the Heroku server or Render.
 
-**If you're new to GIT or Heroku**, keep reading for an **extremely straightforward tutorial** on how to install and configure both, which you'll need in development. **If you already know**, skip directly to [Sugested steps to deploy your app in Heroku](#sugested-steps-to-deploy-your-app-in-heroku).
-
+**If you're new to GIT, Heroku or Render**, keep reading for an **extremely straightforward tutorial** on how to install and configure both, which you'll need in development. **If you already know**, skip directly to [Sugested steps to deploy your app to Render](#render) or [Sugested steps to deploy your app to Heroku](#heroku).
+ 
 At the end, under [Useful Links](#useful-links), there is a small list of documentation and links to Python, Flask, HTML, Javascript and CSS.
 
 * Version: Python3
@@ -14,23 +18,93 @@ At the end, under [Useful Links](#useful-links), there is a small list of docume
 
 # Contents
 
-* [Base Flask App](#base-flask-app)
-* [Git and Heroku CLI](#git-and-heroku-cli)
-    * [Git](#git)
-    * [Heroku-CLI](#heroku-cli)
-* [Sugested steps to deploy your app in Heroku](#sugested-steps-to-deploy-your-app-in-heroku)
+* [Introduction](#base-flask-app)
+* [Install](#install)
+* [Git](#git)
 * [Run in localhost](#run-in-localhost)
-* [Future app updates](#future-app-updates)
+* [Suggested steps to deploy your app](#suggested-steps-to-deploy-your-app)
+    * [Render](#render)
+      * [Render Account](#render-account)
+      * [Render Deploy](#render-deploy)
+    * [Heroku](#heroku)
+      * [Heroku Tools](#heroku-tools)
+      * [Heroku Deploy](#heroku-deploy)
+* [Future App Updates](#future-app-updates)
 * [Recommended: Python version](#recommended-python-version)
 * [Useful Links](#useful-links)
     * [Python](#python)
     * [Virtual Environments](#virtual-environments)
     * [Flask](#flask)
     * [Frontend](#frontend)
+* [What is missing?](#what-is-missing)
 
-# Git and Heroku CLI
+# Install
 
-## Git
+## Using pip+venv (Linux) 
+
+You must have:
+
+* git: To clone this project (or you can download the zip from Git Hub)
+* Python 3: The main server language
+* pip: To install Python packages
+* Python Packages: venv
+
+```bash
+  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Clone this rep
+  $ cd baseflask                                                  # go to folder
+  $ python3 -m venv .env                                          # Create environment in folder .env
+  $ source .env/bin/activate                                      # Activate your environment
+  $ pip install -r requirements.txt                               # Install required packages
+  $ flask run                                                     # Start server
+```
+
+After these steps, your server will be running in localhost:5000
+
+## Using Anaconda
+
+You must have:
+
+* Anaconda distribution installed [(link)](https://www.anaconda.com/products/distribution
+)
+
+Steps:
+
+* Create a new environment: "baseflask_env"
+  * Choose the latest Python 3.x version
+* Open terminal in baseflask_env environment
+* Install pip
+
+```bash
+  C:\> conda install pip
+```
+
+* Create a folder and clone the repository in that folder:
+
+```bash
+  C:\> cd [your folder]                                                                 # go to folder
+  C:\[your folder]> git clone https://github.com/davidvazteixeira/baseflask.git         # Download project files in baseflask
+```
+
+A new subfolder "baseflask" will be created inside [your folder].
+
+* Go to the "baseflask" folder inside [your folder]
+* Install projects packages using pip
+
+```bash
+  C:\[your folder]\baseflask> pip install -r requirements.txt                           # Install additional Python packages
+```
+
+* Run server
+
+```bash
+  C:\[your folder]\baseflask> python3 -m flask run                                      # Start server!
+```
+
+After these steps, your server will be running in localhost:5000. Test in your browser.
+
+> Note: localhost:5000 no working? try 127.0.0.1:5000
+
+# Git
 
 **Install git**
 
@@ -47,56 +121,6 @@ Generally you just need theses commands:
 
 * Full documentation: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
 
-## Heroku-CLI
-
-**Install heroku-cli**
-
-<https://devcenter.heroku.com/articles/heroku-cli>
-
-**Check your installation:**
-
-```bash
-  $ heroku --version
-```
-
-If you see a version information the installation is right.
-
-**Connect with your Heroku account**
-
-```
-  $ heroku login
-```
-
-A new browser window will open. Just login with your Heroku login/pass. After logon, return to terminal and if everything was right you will see something like this:
-
-```
-  $ heroku login
-  heroku: Press any key to open up the browser to login or q to exit
-   ›   Warning: If browser does not open, visit
-   ›   https://cli-auth.heroku.com/auth/browser/***
-  heroku: Waiting for login...
-  Logging in... done
-  Logged in as YOUR_HEROKU_LOGIN
-```
-
-# Sugested steps to deploy your app in Heroku
-
-```bash
-  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Clone this rep
-  $ cd baseflask                                                  # go to folder
-  $ heroku create YOUR_NEW_APP_NAME                               # create a heroku app
-  $ git push heroku master                                        # push modifications to server
-
-  # ... Many output lines here! Check for erros!
-    
-  $ heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
-  $ heroku open                         # open link in a browser window
-```
-
-Note: If "heroku open" don't start your browser, your application link will be:
-
-<https://YOUR_NEW_APP_NAME.herokuapp.com>
-
 # Run in localhost
 
 localhost is the machine you are on.
@@ -110,14 +134,15 @@ localhost is the machine you are on.
 If everything was set correctly, test locally with:
 
 Development webserver 
-```
+
+```bash
   $ flask run                   # Or ...
   $ python -m flask run
 ```
 
 or a more robust webserver (same running in Heroku):
 
-```
+```bash
   $ gunicorn app:app            # Or ...
   $ python -m gunicorn app:app
 ```
@@ -129,7 +154,117 @@ And your app will be running at URL:
 
 If you got "flask/gunicorn not found" than you forgot to: 1) activate your Python environment or 2) install flask or gunicorn.
 
-# Future app updates
+# Suggested steps to deploy your app
+
+## Render
+
+https://render.com
+
+### Render Account
+  
+* Create an account in render.com
+* Optionally, connect your Git Hub account to your Render account
+
+### Render Deploy
+
+* Go to dash board https://dashboard.render.com/
+  * Click button "New+"
+  * Choose "Webservice"
+* Connect a repository
+  * You can:
+    * use your own GitHub repository (public or private)
+    * test this repository (just use: git@github.com:davidvazteixeira/baseflask.git)
+* Configure some params:
+  * Name:
+    * this name must be unique in Render.
+    * Will be your address: name.onrender.com
+  * Root: leave blank
+  * Environment: Python 3
+  * Region: choose any
+  * branch: master
+  * build command: keep "pip install -r requirements.txt"
+  * start command: keep "gunicorn app:app"
+    * This will run the project with gunicorn server, not "flask run"
+  * Plans: choose Free
+  * Avanced:
+    * Here you can set useful things like environment variables
+    * For now, just skip
+  * Click "Create Web Service"
+
+After this you will see a datetime and "in progress..." animation. When ready, the "in progress" will change to "Live" At the time of this writing, the free plan deployed in 6 minutes. In this screen you can check your web server link in the form https://name.onrender.com
+
+This project is onrender at: https://baseflask.onrender.com
+
+> Note: Oh no! 404 error!?
+
+The first time you deploy an app, Render.com can delay and additional 20 minutes to update the routing after you see the "Live". In the application screen, see the "logs". If it's ok like above, just wait a little and try again.
+
+```
+Oct 12 03:02:30 PM  ==> Starting service with 'gunicorn app:app'
+Oct 12 03:02:34 PM  [2022-10-12 18:02:34 +0000] [52] [INFO] Starting gunicorn 20.1.0
+Oct 12 03:02:34 PM  [2022-10-12 18:02:34 +0000] [52] [INFO] Listening at: http://0.0.0.0:10000 (52)
+Oct 12 03:02:34 PM  [2022-10-12 18:02:34 +0000] [52] [INFO] Using worker: sync
+Oct 12 03:02:34 PM  [2022-10-12 18:02:34 +0000] [55] [INFO] Booting worker with pid: 55
+# blank after this? Wait a little for the router and try the address again.
+```
+
+## Heroku
+
+> Note: Heroku has **NO FREE PLAN ANYMORE!** 
+
+https://www.heroku.com
+
+### Heroku Tools
+
+Heroku has CLI tool that helps the process of deploy.
+
+<https://devcenter.heroku.com/articles/heroku-cli>
+
+**Check your installation:**
+
+```bash
+  $ heroku --version
+```
+
+If you see a version information the installation is right.
+
+**Connect with your Heroku account**
+
+```bash
+  $ heroku login
+```
+
+A new browser window will open. Just login with your Heroku login/pass. After logon, return to terminal and if everything was right you will see something like this:
+
+```bash
+  $ heroku login
+  heroku: Press any key to open up the browser to login or q to exit
+   ›   Warning: If browser does not open, visit
+   ›   https://cli-auth.heroku.com/auth/browser/***
+  heroku: Waiting for login...
+  Logging in... done
+  Logged in as YOUR_HEROKU_LOGIN
+```
+
+### Heroku Deploy
+
+```bash
+  $ git clone https://github.com/davidvazteixeira/baseflask.git   # Clone this rep
+  $ cd baseflask                                                  # go to folder
+  $ heroku create YOUR_NEW_APP_NAME                               # create a heroku app
+  $ git push heroku master                                        # push modifications to server
+
+  # ... Many output lines here! Check for errors!
+    
+  $ heroku ps:scale web=1               # create 1 free dyno to run your app (dyno ~ processor)
+  $ heroku open                         # open link in a browser window
+```
+
+Note: If "heroku open" don't start your browser, your application link will be:
+
+<https://YOUR_NEW_APP_NAME.herokuapp.com>
+
+# Future App Updates
 
 > Note: This is an oversimplified scenario that "just works" for a git newbie.
 
@@ -137,16 +272,24 @@ After you make changes in some files you will need to push this "new version" of
 
 Go back to terminal in the root folder of your project and:
 
-```
-git status                      # just to see all new and modified files
-git add -A                      # Mark all modifications for commit
-git commit -m 'some message'    # Apply the commit, with a message
-git push heroku master          # Push all commits to the server
+```bash
+  $ git status                      # just to see all new and modified files
+  $ git add -A                      # Mark all modifications for commit
+  $ git commit -m 'some message'    # Apply the commit, with a message
+  $ git push SERVER master          # Push all commits to the server
 ```
 
-> Note: After *EVERY* push, Heroku server will automatically deploy again your app. Always check the output for errors!
+> Note: SERVER here is the name of the server that host your code.
 
-Return to browser and check your updated website.
+* Heroku:
+  * likes to keep the code in his own base.
+  * Use "heroku" in place of SERVER
+  * After *EVERY* push, Heroku CLI will show some information. Always check the output for errors!
+* Render:
+  * In render, you can use the same github.
+  * probably the server is just "origin", so use in place of SERVER
+
+> Note: Return to browser and check your updated website.
 
 # Recommended: Python version
 
@@ -162,9 +305,9 @@ python-3.8.13
 
 You can check your development version by running:
 
-```
-  python -V      # generally under environment
-  python3 -V     # generally under system environment
+```bash
+  $ python -V      # generally under environment
+  $ python3 -V     # generally under system environment
 ```
 
 The command you return something like:
@@ -222,3 +365,13 @@ The command you return something like:
   * https://www.w3schools.com/jquery/default.asp
   * https://www.tutorialspoint.com/jquery/index.htm
   * https://www.javatpoint.com/jquery-tutorial
+
+# What Is Missing?
+
+  * Database. You must find you way to include it. You can start from here:
+    * SQLite: https://flask.palletsprojects.com/en/2.2.x/tutorial/database
+    * MySQL: https://flask-mysql.readthedocs.io/en/stable
+    * MariaDB: https://mariadb.com/resources/blog/using-sqlalchemy-with-mariadb-connector-python-part-1
+    * PostgreSQL: https://www.digitalocean.com/community/tutorials/how-to-use-a-postgresql-database-in-a-flask-application
+    * MongoDB: https://flask.palletsprojects.com/en/2.2.x/patterns/mongoengine
+
