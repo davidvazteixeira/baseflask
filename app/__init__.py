@@ -1,6 +1,8 @@
 from flask import Flask
 
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+from app.configs import configs, base
+from app.database import adapter
+from app.database.models import *
 from app import routes

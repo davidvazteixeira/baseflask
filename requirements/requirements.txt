@@ -1,0 +1,12 @@
+click
+Flask
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+#Flask-SQLAlchemy
+peewee
+pyyaml
+psycopg2
+pymysql

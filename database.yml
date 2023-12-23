@@ -1,0 +1,29 @@
+# Choose your database type:
+
+# Do not uso database
+#adapter:
+#  type: none
+
+# SQLite
+adapter:
+  type: sqlite
+  database_name: baseflask.db
+ 
+# Postgres
+#adapter:
+  #type: postgresql
+  #database_name: bfdo
+  #user: postgres
+  #password: password
+  #host: localhost
+  #port: 5432
+  
+# MySQL
+#adapter:
+#  type: mysql
+#  database_name: baseflask_dev
+#  user: mariadb
+#  password: mariadb
+#  host: localhost
+#  port: 3306
+#  charset: utf8mb4

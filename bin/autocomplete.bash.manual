@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Source this file to enable autocomplete to db command
+
+_db()
+{
+    local cur prev
+
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    case ${COMP_CWORD} in
+        1)
+            COMPREPLY=($(compgen -W "database tables info" -- ${cur}))
+            ;;
+        2)
+            case ${prev} in
+                database)
+                    COMPREPLY=($(compgen -W "create setup" -- ${cur}))
+                    ;;
+                tables)
+                    COMPREPLY=($(compgen -W "create drop seed" -- ${cur}))
+                    ;;
+                info)
+                    COMPREPLY=($(compgen -W "adapter" -- ${cur}))
+                    ;;
+            esac
+            ;;
+        *)
+            COMPREPLY=()
+            ;;
+    esac
+}
+
+complete -F _db db

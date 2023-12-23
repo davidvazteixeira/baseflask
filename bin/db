@@ -1,0 +1,130 @@
+#!/usr/bin/env python3 
+
+import sys
+import importlib
+sys.path.append('.')
+
+from app import app
+from app.database import adapter
+from app.database import models
+from app.database import seed_complex
+import peewee as pw
+import yaml
+
+def get_model_class(name):
+  return getattr(getattr(importlib.import_module("app.database"), "models"), name)
+
+def seed_simple():
+  with open('app/database/seed_simple.yml') as f:
+    seed = yaml.safe_load(f)
+    for key, value in seed.items():
+      if isinstance(value, list):
+        model_class = get_model_class(key)
+        args = {}
+        for item in value:
+          for child_key, child_value in item.items():
+            args[child_key] = child_value            
+            print(child_key, ":", child_value)
+          model_class.create(**args)
+      else:      
+        model_class = get_model_class(key)
+        model_class.create(**value)
+        print(key, ":", value)
+
+def seed_tables():
+  print('Seeding tables')
+  complex_seed = seed_complex.SeedComplex()
+ 
+  if complex_seed.simple_first:
+    if complex_seed.use_simple: seed_simple()
+    if complex_seed.use_complex: complex_seed.populate()    
+  else:
+    if complex_seed.use_complex: complex_seed.populate()
+    if complex_seed.use_simple: seed_simple()
+
+def drop_tables():
+  print('Droping tables')
+  app.db.drop_tables(models.BareModel.__subclasses__())    
+  app.db.drop_tables(models.SimpleModel.__subclasses__())    
+
+def create_tables():
+  print('Creating tables')
+  app.db.create_tables(models.BareModel.__subclasses__())
+  app.db.create_tables(models.SimpleModel.__subclasses__())
+
+def setup_database():
+  create_database()
+  reset_datavase()  
+  seed_tables()
+  
+def adapter_name():
+  return app.db_conf['adapter']['type']
+  
+def create_database():
+  adapter = adapter_name()
+  print('Creating database using: ', end='')
+  if adapter == "sqlite":
+    print('SQLite adapter')
+    import peewee as pw
+    pw.SqliteDatabase(app.db_conf['adapter']['database_name'])
+    
+  elif adapter == "postgresql":
+    print('Postgres adapter')
+    import psycopg2
+    from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
+    database_name = app.db_conf['adapter']['database_name']
+    user = app.db_conf['adapter']['user']
+    password = app.db_conf['adapter']['password']
+    host = app.db_conf['adapter']['host']
+    port = app.db_conf['adapter']['port']    
+    
+    con = psycopg2.connect(f"user='{user}' password='{password}' host='{host}' port='{port}'")
+    con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT);
+    cursor = con.cursor()
+    cursor.execute(f"create database {database_name};")
+    
+  elif adapter == "mysql":
+    print('MySQL adapter')
+    import pymysql
+    host = 'localhost'
+    user = 'mariadb'
+    password = 'mariadb'
+    dbname = 'another'
+    charset = 'utf8mb4'
+    cursorType = pymysql.cursors.DictCursor
+    connectionInstance   = pymysql.connect(host=host, user=user, password=password, charset=charset)
+    cursorInstance       = connectionInstance.cursor()
+    sqlStatement         = "CREATE DATABASE " + dbname
+    cursorInstance.execute(sqlStatement)  
+
+def proccess_arguments():
+  cmd = ' '.join(sys.argv[1:])
+
+  if cmd == '':
+    print('Base Flask do...')
+    print('...needs somethong to do')
+    exit()
+  elif cmd == 'database create':
+    create_database()
+  elif cmd == 'database setup':
+    create_database()
+    app.db.connect()
+    drop_tables()
+    create_tables()
+    seed_tables()
+  elif cmd == 'tables create':
+    app.db.connect()
+    create_tables()
+  elif cmd == 'tables drop':
+    app.db.connect()
+    drop_tables()
+  elif cmd == 'tables seed':
+    app.db.connect()
+    seed_tables()
+  elif cmd == 'info adapter':
+    print(adapter_name())
+  else:
+    print("Base Flask doesn't know how to do this")
+
+proccess_arguments()

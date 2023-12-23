@@ -1,0 +1,3 @@
+database: "create setup"
+tables: "create drop seed"
+info: "adapter"
